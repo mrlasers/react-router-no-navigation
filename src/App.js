@@ -3,32 +3,11 @@ import './App.css'
 import { matchPath, useMatch, PathPattern } from 'react-router'
 import { Route, Routes, BrowserRouter, Link } from 'react-router-dom'
 
-const Nav = () => {
-  return (
-    <header>
-      <nav>
-        <h1>Conditional Navigation</h1>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/nonav'>No Nav</Link>
-          </li>
-          <li>
-            <Link to='/oops'>Oops, bad link</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  )
-}
-
-const Noop = () => null
+import { PrimaryLayout, NoNavLayout } from './layouts'
 
 const Home = () => {
   return (
-    <main>
+    <PrimaryLayout title='Conditional Navigation'>
       <p>Welcome to our cool website home page.</p>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam neque
@@ -60,38 +39,32 @@ const Home = () => {
         Perferendis porro esse provident dolorum dolor saepe molestias, ex
         facere animi omnis, fugiat optio vel?
       </p>
-    </main>
+    </PrimaryLayout>
   )
 }
 
 const NoNav = () => {
   return (
-    <main>
+    <NoNavLayout>
       <h1>No Navigation Is Shown on This Page</h1>
       <p>
         Nothing to see here, but you can{' '}
         <Link to='/'>go back to the homepage</Link>.
       </p>
-    </main>
+    </NoNavLayout>
   )
 }
 
 const FourOhFour = () => (
-  <main>
+  <PrimaryLayout title='Page Not Found'>
     <h2>404</h2>
     <p>Page not found</p>
-  </main>
+  </PrimaryLayout>
 )
 
 function App() {
   return (
     <BrowserRouter>
-      {/* Header / Navigation */}
-      <Routes>
-        <Route path='nonav' element={<Noop />} />
-        <Route path='*' element={<Nav />} />
-      </Routes>
-      {/* Page Content */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/nonav' element={<NoNav />} />
